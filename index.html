@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Saathi Pitch Deck</title>
+    <!-- Tailwind CSS CDN for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for 'Poppins' with font-display: swap for quicker rendering -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to enhance Tailwind and define core layout behaviors */
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            overflow: hidden; /* Hide scrollbars, handled by JS/CSS for slide transitions */
+            background-color: #111827; /* Tailwind bg-gray-900 equivalent */
+            color: white; /* Default text color */
+        }
+        .slide {
+            width: 100vw; /* Each slide takes full viewport width */
+            height: 100vh; /* Each slide takes full viewport height */
+            flex-shrink: 0; /* Prevents slides from shrinking */
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for slide movement */
+            overflow-y: auto; /* Allow scrolling within slide content if it exceeds viewport height */
+            padding-left: 280px; /* Space for fixed left navigation */
+            position: relative; /* Needed for animated items within the slide */
+        }
+        @media (max-width: 768px) {
+            .slide {
+                padding-left: 0; /* Remove left padding on smaller screens */
+            }
+        }
+        .slide-container {
+            display: flex; /* Arranges slides horizontally */
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition for horizontal movement */
+            width: fit-content; /* Adjust width dynamically by JavaScript */
+        }
+        #leftNav {
+            transition: transform 0.3s ease-in-out; /* Smooth transition for mobile menu toggle */
+        }
+        .left-nav-link.active {
+            background-color: #F97316; /* Tailwind orange-600 */
+            color: white;
+            font-weight: 600;
+        }
+        /* Keyframe for staggered fadeInUp animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Classes for staggered animation applied to items within the active slide */
+        .slide.active .animated-item { animation: fadeInUp 0.8s ease-out forwards; }
+        .slide.active .animated-item-1 { animation-delay: 0.2s; opacity: 0; }
+        .slide.active .animated-item-2 { animation-delay: 0.4s; opacity: 0; }
+        .slide.active .animated-item-3 { animation-delay: 0.6s; opacity: 0; }
+        .slide.active .animated-item-4 { animation-delay: 0.8s; opacity: 0; }
+        .slide.active .animated-item-5 { animation-delay: 1.0s; opacity: 0; }
+        .slide.active .animated-item-6 { animation-delay: 1.2s; opacity: 0; }
+        .slide.active .animated-item-7 { animation-delay: 1.4s; opacity: 0; }
+        .slide.active .animated-item-8 { animation-delay: 1.6s; opacity: 0; }
+        .slide.active .animated-item-9 { animation-delay: 1.8s; opacity: 0; } /* Added for the last slide's contact info */
+
+        /* General content card styling for consistency across slides */
+        .content-card, .feature-card { /* feature-card added for consistent styling */
+            background-color: rgba(255, 255, 255, 0.05); /* White with transparency */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem; /* Rounded corners */
+            padding: 1.5rem;
+            transition: all 0.3s ease; /* Smooth hover effects */
+            color: white; /* Ensure text is white on dark card */
+        }
+        .content-card:hover, .feature-card:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+        /* Specific brand colors using Tailwind equivalents */
+        .text-orange-primary {
+            color: #F97316; /* orange-600 */
+        }
+        .border-orange-primary {
+            border-color: #F97316; /* orange-600 */
+        }
+        .bg-orange-light {
+            background-color: rgba(249, 115, 22, 0.1); /* orange-600 with transparency */
+            color: #F97316;
+        }
+        .bg-black-translucent {
+             background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black for content cards */
+        }
+        .btn-theme-primary {
+            background-color: #F97316; /* orange-600 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .btn-theme-primary:hover {
+            background-color: #EA580C; /* orange-700 */
+        }
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .feature-card .icon-large {
+            width: 4rem; /* 64px */
+            height: 4rem; /* 64px */
+            margin-bottom: 1rem;
+            color: #F97316; /* Tailwind orange-600 */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header: Fixed at the top, includes menu toggle, logo, title, and navigation buttons -->
+    <header class="fixed top-0 left-0 w-full z-50 p-4 flex justify-between items-center bg-gray-900/50 backdrop-blur-sm md:pl-[280px]">
+        <div class="flex items-center space-x-3">
+             <!-- Mobile menu toggle button -->
+             <button id="menuToggle" class="md:hidden p-2 rounded-md text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+            <!-- Logo SVG -->
+            <svg class="h-8 w-8 text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414-.336.75-.75.75h-1.5m1.5 0v.375c0 .621-.504 1.125-1.125 1.125h-17.25m0 0h.008v.008H2.25v-.008ZM2.25 16.5v.75a.75.75 0 0 0 .75.75h.75m0 0h.375c.621 0 1.125-.504 1.125-1.125V16.5m0 0h17.25m0 0h.75a.75.75 0 0 1 .75.75v.75M3.75 16.5h.375c.621 0 1.125.504 1.125 1.125v.375m0 0h17.25" />
+            </svg>
+            <span id="deckTitleHeader" class="text-xl font-bold">Startup Saathi Pitch Deck</span>
+        </div>
+        <div class="flex items-center space-x-4 pr-4">
+            <!-- Previous slide button -->
+            <button id="prevBtn" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg></button>
+            <!-- Next slide button -->
+            <button id="nextBtn" class="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg></button>
+        </div>
+    </header>
+
+    <!-- Left Navigation: Fixed sidebar for quick slide access -->
+    <aside id="leftNav" class="fixed top-0 left-0 h-full w-64 bg-gray-900/80 backdrop-blur-md z-40 p-4 border-r border-white/10 -translate-x-full md:translate-x-0">
+        <nav class="mt-20 flex flex-col space-y-2" id="leftNavLinks"></nav>
+    </aside>
+
+    <!-- Main Content Area: Contains all the slides, arranged horizontally by JS -->
+    <main id="slideContainer" class="slide-container">
+        <!-- Slide 1: Title Slide -->
+        <section id="slide-1" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-center bg-black-translucent rounded-lg shadow-xl flex flex-col justify-center items-center h-full">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 animated-item animated-item-1 text-orange-400">Startup Saathi</h1>
+                <p class="text-xl md:text-3xl text-white font-light mb-6 animated-item animated-item-2">Your Digital Partner for Startup Success in India.</p>
+                <div class="mt-10 animated-item animated-item-3">
+                    <!-- Placeholder logo/icon for visual appeal -->
+                    <svg class="w-48 h-48 mx-auto text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L6 12h12L12 2z" />
+                        <path d="M12 12v10" />
+                        <circle cx="12" cy="17" r="3" />
+                        <line x1="7" y1="14" x2="17" y2="14" />
+                        <line x1="9" y1="18" x2="15" y2="18" />
+                    </svg>
+                </div>
+                <p class="text-xl md:text-2xl mt-8 text-gray-300 animated-item animated-item-4">
+                    Empowering Innovation, Simplifying Execution.
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 2: The Problem -->
+        <section id="slide-2" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">The Problem: Navigating the Startup Maze</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    Indian founders face a unique set of challenges that divert focus from core innovation.
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-200 space-y-4">
+                    <li class="content-card animated-item animated-item-3">
+                        <strong class="text-red-400">Company Registration & Legal Access:</strong> Lack of instantaneous access to CA/CS for formation details, essential templates, and quick company name availability checks.
+                    </li>
+                    <li class="content-card animated-item animated-item-4">
+                        <strong class="text-amber-400">Name & Brand Sanitization:</strong> Uncertainty about the availability of company names and brands, leading to potential trademark infringement risks.
+                    </li>
+                    <li class="content-card animated-item animated-item-5">
+                        <strong class="text-blue-400">Fragmented Workspace:</strong> No dedicated online workspace to centralize initial ideas, workings, and foster seamless collaboration among co-founders.
+                    </li>
+                    <li class="content-card animated-item animated-item-6">
+                        <strong class="text-green-400">Idea-to-Pitch Conversion:</strong> Difficulty in quickly structuring and converting nascent ideas into professional, investor-ready pitch decks.
+                    </li>
+                    <li class="content-card animated-item animated-item-7">
+                        <strong class="text-purple-400">Capital Raise & Dilution Complexity:</strong> Lack of clarity on how to structure capital raises and insufficient simulation options to understand equity dilution impacts.
+                    </li>
+                    <li class="content-card animated-item animated-item-8">
+                        <strong class="text-cyan-400">Limited Funding Awareness:</strong> Founders are often unaware of available government programs, grants, and various funding options specifically for early-stage startups.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Solution -->
+        <section id="slide-3" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">The Solution: Startup Saathi – Your All-in-One Founder OS</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    An intelligent, secure, and integrated web portal empowering Indian startups across their entire lifecycle.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 text-lg text-gray-200">
+                    <div class="content-card animated-item animated-item-3">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p><strong class="text-orange-400">Unified Workspace:</strong> A secure environment for all your startup groundwork, from idea to execution.</p>
+                        </div>
+                    </div>
+                    <div class="content-card animated-item animated-item-4">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0h.01M12 12h9.22c.28 0 .5-.22.5-.5V5.264l-.65-.376A7.003 7003 0 0012 2a7.003 7003 0 00-8.57 3.882L3 5.264V12.5c0 .28.22.5.5.5H12z"></path></svg>
+                            <p><strong class="text-orange-400">Intelligent Tools:</strong> AI-powered insights for funding, compliance, and strategic planning.</p>
+                        </div>
+                    </div>
+                    <div class="content-card animated-item animated-item-5">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h6a2 2 0 012 2v10a2 2 0 01-2 2h-6a2 2 0 00-2 2v-3m0-3h-2m5-3h.01"></path></svg>
+                            <p><strong class="text-orange-400">Collaborative Environment:</strong> Securely share and manage work with your co-founders and team.</p>
+                        </div>
+                    </div>
+                    <div class="content-card animated-item animated-item-6">
+                        <div class="flex items-center">
+                            <svg class="w-8 h-8 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5A2.5 2.5 0 005 7.5c0 .67.333 1.258.85 1.653M12 6.253C13.168 5.477 14.754 5 16.5 5A2.5 2.5 0 0119 7.5c0 .67-.333-1.258-.85-1.653m-1.336 1.336c-.714.535-1.547.95-2.433 1.196m-9.363 1.096c.714.535 1.547.95 2.433 1.196m-1.006.106C7.832 14.477 9.246 15 10.5 15A2.5 2.5 0 0013 12.5c0-.67-.333-1.258-.85-1.653m-1.336 1.336c.714.535 1.547.95 2.433 1.196m-9.363 1.096c.714.535 1.547.95 2.433 1.196"></path></svg>
+                            <p><strong class="text-orange-400">Expert-Curated Resources:</strong> Templates, guides, and network access for informed decision-making.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Key Offerings - Portal Modules -->
+        <section id="slide-4" class="slide">
+            <div class="max-w-6xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Startup Saathi: Core Portal Modules</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    Our platform provides integrated tools and resources for every critical step of your startup journey.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Reordered offerings as per request -->
+                    <div class="feature-card animated-item animated-item-3">
+                        <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        <h3 class="text-xl font-bold text-gray-100 mb-2">Concept Builder & Workspace</h3>
+                        <p class="text-sm text-gray-300 mb-4">Define your idea (Problem, Solution, Market, etc.). Store & share files (PPTs, sheets).</p>
+                        <button class="btn-theme-primary text-sm" onclick="showFeatureDetail(event, 'Concept Builder & Workspace', 'Outline your idea with guided sections like Problem, Solution, and Market. Upload and share documents like Pitch Decks and Financial Models securely with your team.')">Learn More</button>
+                    </div>
+                    <div class="feature-card animated-item animated-item-4">
+                        <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h2a2 2 0 002-2V7a2 2 0 00-2-2h-2V3a1 1 0 00-1-1H8a1 1 0 00-1 1v2H5a2 2 0 00-2 2v11a2 2 0 002 2h2m0 0l-2 2m2-2l2 2m-2-2v2"></path></svg>
+                        <h3 class="text-xl font-bold text-gray-100 mb-2">Team & Access Management</h3>
+                        <p class="text-sm text-gray-300 mb-4">Invite co-founders, advisors, and team members. Granularly control their access to specific sections and files.</p>
+                        <button class="btn-theme-primary text-sm" onclick="showFeatureDetail(event, 'Team & Access Management', 'Add and remove team members from your workspace. Set role-based permissions and granular access controls for documents and modules.')">Learn More</button>
+                    </div>
+                    <div class="feature-card animated-item animated-item-5">
+                        <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        <h3 class="text-xl font-bold text-gray-100 mb-2">Company Registration & Compliance</h3>
+                        <p class="text-sm text-gray-300 mb-4">Hassle-free incorporation, DPIIT/MSME recognition, and bank account setup. Access all legal templates.</p>
+                        <button class="btn-theme-primary text-sm" onclick="showFeatureDetail(event, 'Company Registration & Compliance', 'Seamless digital processes for company formation, DPIIT, and MSME registration. Access a library of legally vetted templates like MoA, AoA, and Founders Agreements.')">Learn More</button>
+                    </div>
+                    <div class="feature-card animated-item animated-item-6">
+                        <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 8a8 8 0 01-8-8H3m8 8a8 8 0 008-8h-1m-10 4h.01M7 10h.01"></path></svg>
+                        <h3 class="text-xl font-bold text-gray-100 mb-2">IP & Branding Protection</h3>
+                        <p class="text-sm text-gray-300 mb-4">Instant checks for Trademark & Domain Name availability, with guided filing assistance. Secure your brand identity.</p>
+                        <button class="btn-theme-primary text-sm" onclick="showFeatureDetail(event, 'IP & Branding Protection', 'Tools to check brand name and domain availability. Access templates for Trademark applications (TM-1) and IP Assignment Agreements.')">Learn More</button>
+                    </div>
+                    <div class="feature-card animated-item animated-item-7">
+                        <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 18a.5.5 0 00.75.5L9 16m-3-9h10.334C19.1 7 20 7.9 20 9v9.667c0 .9-.9 1.333-1.666.923l-7-3.667m-3.992-1.424L3 13.5V11a2 2 0 012-2h6zm-2 4h4m-4 4h4"></path></svg>
+                        <h3 class="text-xl font-bold text-gray-100 mb-2">Equity & Dilution Simulator</h3>
+                        <p class="text-sm text-gray-300 mb-4">Dynamically model founder shares, ESOPs, and investor equity. Simulate dilution scenarios.</p>
+                        <button class="btn-theme-primary text-sm" onclick="showFeatureDetail(event, 'Equity & Dilution Simulator', 'An interactive tool to visualize equity distribution. Experiment with different funding amounts and valuation multiples (revenue, profit, users) to understand dilution impacts.')">Learn More</button>
+                    </div>
+                    <div class="feature-card animated-item animated-item-8">
+                        <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0h.01M12 12h9.22c.28 0 .5-.22.5-.5V5.264l-.65-.376A7.003 7003 0 0012 2a7.003 7003 0 00-8.57 3.882L3 5.264V12.5c0 .28.22.5.5.5H12z"></path></svg>
+                        <h3 class="text-xl font-bold text-gray-100 mb-2">Govt. Funding & Investor Connect</h3>
+                        <p class="text-sm text-gray-300 mb-4">Discover relevant Indian government grants and connect with a curated network of Angel Investors and VCs.</p>
+                        <button class="btn-theme-primary text-sm" onclick="showFeatureDetail(event, 'Govt. Funding & Investor Connect', 'Access a database of government funding schemes like SISFS and FFS. Use our AI-powered matching to connect with investors based on your stage and sector.')">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Product Experience (Mini-Demo) -->
+        <section id="slide-5" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Product Experience: A Glimpse Inside</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    Startup Saathi is more than a platform; it's an interactive, collaborative co-founder.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="animated-item animated-item-3">
+                        <h3 class="text-xl font-bold text-gray-100 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            Concept Builder: Crafting Your Narrative
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Imagine defining your <strong class="text-orange-300">Problem, Solution, and Market Opportunity</strong> in structured sections.
+                            Our builder guides you with prompts and examples, ensuring you cover all investor-critical points.
+                        </p>
+                        <div class="bg-white/10 p-4 rounded-lg text-sm text-gray-300 italic">
+                            "What is the deepest pain point for [Target Customer]? Why is it underserved?"
+                        </div>
+                        <img src="https://placehold.co/400x250/333333/FFA500?text=Concept+Builder+Mockup" alt="Concept Builder Mockup" class="w-full h-auto rounded-lg shadow-md mt-4">
+                    </div>
+
+                    <div class="animated-item animated-item-4">
+                        <h3 class="text-xl font-bold text-gray-100 mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 18a.5.5 0 00.75.5L9 16m-3-9h10.334C19.1 7 20 7.9 20 9v9.667c0 .9-.9 1.333-1.666.923l-7-3.667m-3.992-1.424L3 13.5V11a2 2 0 012-2h6zm-2 4h4m-4 4h4"></path></svg>
+                            Equity Simulator: See Your Future Shares
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            Visually understand <strong class="text-orange-300">dilution</strong> with our interactive simulator. Adjust shares, investment amounts, and valuation multiples to instantly see post-money caps and new equity splits.
+                        </p>
+                        <div class="bg-white/10 p-4 rounded-lg text-sm text-gray-300 italic">
+                            "If we raise ₹2 Cr at a 5x revenue multiple, how much equity do founders retain?"
+                        </div>
+                        <img src="https://placehold.co/400x250/333333/FFA500?text=Equity+Simulator+Chart" alt="Equity Simulator Chart" class="w-full h-auto rounded-lg shadow-md mt-4">
+                    </div>
+
+                    <div class="col-span-full text-center mt-8 animated-item animated-item-5">
+                        <!-- Updated link to open external demo portal -->
+                        <a href="https://vivekrkumar.github.io/StartupSaathi/" target="_blank" class="btn-theme-primary text-xl inline-block">
+                            Experience Full Portal Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Slide 6: Market Opportunity & Size -->
+        <section id="slide-6" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Market Opportunity & Size: A Trillion-Dollar Ecosystem</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    Addressing a rapidly expanding, multi-billion dollar startup support market in the world's 3rd largest startup hub.
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-200 space-y-4 mb-8">
+                    <li class="content-card animated-item animated-item-3">
+                        <strong class="text-green-400">Vibrant Startup Ecosystem:</strong> India is the <span class="font-semibold">3rd largest globally</span>, with over <strong class="font-bold">1.59 lakh DPIIT-recognized startups</strong> (Jan 2025).
+                    </li>
+                    <li class="content-card animated-item animated-item-4">
+                        <strong class="text-blue-400">Strong Growth Trajectory:</strong> Expected <span class="font-semibold">CAGR of 12-15% annually</span>, projected to more than double by 2030.
+                    </li>
+                    <li class="content-card animated-item animated-item-5">
+                        <strong class="text-orange-400">Annual New Registrations:</strong> ~<span class="font-semibold">15,000-20,000 new DPIIT recognized startups annually</span> – our direct customer base for foundational services.
+                    </li>
+                    <li class="content-card animated-item animated-item-6">
+                        <strong class="text-red-400">Significant Funding Activity:</strong> Indian tech startups raised <span class="font-semibold">US$ 4.1 billion in H1 2024</span>. Early-stage funding is robust, indicating high demand for funding management tools.
+                    </li>
+                </ul>
+
+                <h3 class="text-2xl font-bold text-orange-400 mb-4 animated-item animated-item-7">Market Sizing (Volume Perspective - Annual New Startups)</h3>
+                <div class="space-y-4">
+                    <div class="content-card animated-item animated-item-8">
+                        <p><strong class="text-purple-300">Total Addressable Market (TAM):</strong> ~18,000 new DPIIT-recognized startups annually.</p>
+                        <p class="text-sm text-gray-400">*(Total pool of new startups that could potentially use digital business support services)*</p>
+                    </div>
+                    <div class="content-card animated-item animated-item-9">
+                        <p><strong class="text-green-300">Serviceable Available Market (SAM):</strong> ~14,400 new startups annually.</p>
+                        <p class="text-sm text-gray-400">*(New startups actively seeking digital business support solutions, representing ~80% of TAM)*</p>
+                    </div>
+                    <div class="content-card animated-item animated-item-10">
+                        <p><strong class="text-blue-300">Serviceable Obtainable Market (SOM):</strong> Targeting 3,000 to 7,000 new customers annually (over next 1-3 years).</p>
+                        <p class="text-sm text-gray-400">*(Our realistic achievable market share, aiming for 20% of SAM in Year 1, growing to 40% by Year 3)*</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Business Model & Projections -->
+        <section id="slide-7" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Business Model: Value-Driven Tiers</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    A multi-tiered subscription model designed to capture value at every stage of a startup's lifecycle.
+                </p>
+                <div class="space-y-6">
+                    <div class="animated-item animated-item-3">
+                        <h3 class="text-2xl font-bold text-orange-400 mb-3">Revenue Plans & Deliverables:</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white/5 border border-white/10 rounded-lg shadow-sm text-gray-200">
+                                <thead>
+                                    <tr class="bg-white/10 border-b border-white/20 text-gray-200 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">Tier</th>
+                                        <th class="py-3 px-6 text-left">Price</th>
+                                        <th class="py-3 px-6 text-left">Validity / Period</th>
+                                        <th class="py-3 px-6 text-left">Deliverables</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-300 text-sm font-light">
+                                    <tr class="border-b border-white/10 hover:bg-white/5">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap font-medium">One-Time Kickstart</td>
+                                        <td class="py-3 px-6 text-left">₹9,999</td>
+                                        <td class="py-3 px-6 text-left">3 Months</td>
+                                        <td class="py-3 px-6 text-left">Platform access for Ideation, Collaboration, ROC & Branding Checks, Equity Simulator, Sample Docs</td>
+                                    </tr>
+                                    <tr class="border-b border-white/10 hover:bg-white/5">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap font-medium">Annual Growth Subscription</td>
+                                        <td class="py-3 px-6 text-left">₹3,000/month (₹36,000/year)</td>
+                                        <td class="py-3 px-6 text-left">Monthly / Annual</td>
+                                        <td class="py-3 px-6 text-left">Everything in One-Time + Dynamic Compliance Calendar, Investor Platform, Advanced Templates, Dedicated Support</td>
+                                    </tr>
+                                    <tr class="border-b border-white/10 hover:bg-white/5">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap font-medium">Custom Advisory</td>
+                                        <td class="py-3 px-6 text-left">On request</td>
+                                        <td class="py-3 px-6 text-left">N/A</td>
+                                        <td class="py-3 px-6 text-left">Tailored Advisory, Multi-entity Handling, Sector-specific Guidance, Mentor Connect</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-white/10 animated-item animated-item-4">
+                        <h3 class="text-2xl font-bold text-white mb-3">Illustrative Annual Revenue Potential:</h3>
+                        <p class="text-3xl font-extrabold text-green-400">₹45 - ₹55 Crore (approx. US$5.4 - US$6.6+ Million)</p>
+                        <div class="text-sm text-gray-400 mt-4">
+                            <p class="mb-4">This projection is based on acquiring customers from our **annual Serviceable Obtainable Market (SOM)** (3,000-7,000 new customers per year). Over a **3-5 year period**, this translates to a **cumulative active user base of approximately ~20,000 users**. This cumulative user base is refined into two primary segments for annual revenue generation:</p>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full bg-white/5 border border-white/10 rounded-lg shadow-sm text-gray-200">
+                                    <thead>
+                                        <tr class="bg-white/10 border-b border-white/20 text-gray-200 uppercase text-sm leading-normal">
+                                            <th class="py-2 px-4 text-left">Revenue Stream</th>
+                                            <th class="py-2 px-4 text-left">Assumptions (applied to cumulative active users)</th>
+                                            <th class="py-2 px-4 text-right">Annual Revenue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-300 text-sm font-light">
+                                        <tr class="border-b border-white/10 hover:bg-white/5">
+                                            <td class="py-2 px-4 whitespace-nowrap"><strong>One-Time Kickstart</strong></td>
+                                            <td class="py-2 px-4">70% of cumulative users (14,000 users) × ₹9,999/payment × 2 payments/year (renewals)</td>
+                                            <td class="py-2 px-4 text-right">₹28.0 Crore</td>
+                                        </tr>
+                                        <tr class="border-b border-white/10 hover:bg-white/5">
+                                            <td class="py-2 px-4 whitespace-nowrap"><strong>Annual Growth Subscription</strong></td>
+                                            <td class="py-2 px-4">30% of cumulative users (6,000 users) × ₹3,000/month × 12 months/year</td>
+                                            <td class="py-2 px-4 text-right">₹21.6 Crore</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-4 font-bold" colspan="2">Total Estimated Annual Revenue:</td>
+                                            <td class="py-2 px-4 text-right font-bold text-green-300">₹49.6 Crore</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="mt-4">This range accounts for variations in customer acquisition rate, conversion from One-Time to Annual Subscription, and potential upsells/cross-sells over time, aiming for the **₹45 - ₹55 Crore** range.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Our Competitive Advantage -->
+        <section id="slide-8" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Our Competitive Advantage</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    Why Startup Saathi is the indispensable partner for Indian founders.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 text-lg text-gray-200">
+                    <div class="content-card animated-item animated-item-3">
+                        <div class="flex items-start">
+                            <span class="block mr-3 mt-1"><svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 10-4 0v11.597a2 2 0 00.553 1.342l1.26 1.26a1 1 0 001.414 0l1.26-1.26A2 2 0 0013 15.597V4a2 2 0 10-2 0zM4.322 13.916a2 2 0 10-.73 3.013L6 19l-2.322 2.071a1 1 0 00-.062 1.583L5 23h14l.384-.33A1 1 0 0020.062 21.07L18 19l2.408-2.071a2 2 0 10-.73-3.013L15 17h-2l-1-1-1 1H9l-3-3-1.678 1.916z"></path></svg></span>
+                            <p><strong class="text-orange-400">End-to-End Digital Ecosystem:</strong> From idea validation and registration to funding and ongoing compliance, a single platform for all startup needs.</p>
+                        </div>
+                    </div>
+                    <div class="content-card animated-item animated-item-4">
+                        <div class="flex items-start">
+                            <span class="block mr-3 mt-1"><svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.364 1.636l-.707-.707M12 20v-1m-6.364-1.636l-.707.707M18 10a8 8 0 11-16 0 8 8 0 0116 0z"></path></svg></span>
+                            <p><strong class="text-orange-400">Intelligent Automation & AI:</strong> Leveraging AI for smart matchmaking, predictive compliance alerts, and personalized guidance.</p>
+                        </div>
+                    </div>
+                    <div class="content-card animated-item animated-item-5">
+                        <div class="flex items-start">
+                            <span class="block mr-3 mt-1"><svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h6a2 2 0 012 2v10a2 2 0 01-2 2h-6a2 2 0 00-2 2v-3m0-3h-2m5-3h.01"></path></svg></span>
+                            <p><strong class="text-orange-400">Founder-Centric Design:</strong> Built from a founder's perspective, addressing real pain points with intuitive interfaces and actionable insights.</p>
+                        </div>
+                    </div>
+                    <div class="content-card animated-item animated-item-6">
+                        <div class="flex items-start">
+                            <span class="block mr-3 mt-1"><svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></span>
+                            <p><strong class="text-orange-400">Extensive Network & Partnerships:</strong> Access to a curated network of investors, incubators, and legal/financial experts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Our Team -->
+        <section id="slide-9" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Our Team: Built by Founders, for Founders</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    A dedicated team passionate about empowering India's next generation of innovators.
+                </p>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="content-card animated-item animated-item-3">
+                        <img src="https://placehold.co/120x120/F97316/111827?text=Founder" alt="Founder Placeholder" class="rounded-full mb-4 w-32 h-32 object-cover border-4 border-orange-600 mx-auto">
+                        <h3 class="text-xl font-bold text-gray-100">Founder Name</h3>
+                        <p class="text-sm text-gray-300 mt-1">X years as a successful founder, deep understanding of startup pain points in India.</p>
+                    </div>
+                    <div class="content-card animated-item animated-item-4">
+                        <img src="https://placehold.co/120x120/111827/F97316?text=CTO" alt="CTO Placeholder" class="rounded-full mb-4 w-32 h-32 object-cover border-4 border-orange-600 mx-auto">
+                        <h3 class="text-xl font-bold text-orange-400">CTO Name</h3>
+                        <p class="text-sm text-gray-300 mt-1">Y years in building scalable SaaS platforms and AI-driven solutions for millions of users.</p>
+                    </div>
+                    <div class="content-card animated-item animated-item-5">
+                        <img src="https://placehold.co/120x120/F97316/111827?text=Head+of+Ops" alt="Head of Ops Placeholder" class="rounded-full mb-4 w-32 h-32 object-cover border-4 border-orange-600 mx-auto">
+                        <h3 class="text-xl font-bold text-gray-100">Head of Operations</h3>
+                        <p class="text-sm text-gray-300 mt-1">Z years in legal compliance and financial advisory, specialized in Indian regulatory landscape.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: The Ask & Vision -->
+        <section id="slide-10" class="slide">
+            <div class="max-w-4xl mx-auto p-8 pt-20 text-white bg-black-translucent rounded-lg shadow-xl text-center">
+                <h2 class="text-4xl font-extrabold mb-6 animated-item animated-item-1 text-orange-400">The Ask: Fueling India's Startup Revolution</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    We are seeking <strong class="text-orange-300">[Your Ask: e.g., $X Million Seed Funding]</strong> to achieve the following:
+                </p>
+                <ul class="list-disc list-inside text-lg text-gray-200 space-y-3 mb-10 text-left w-full max-w-lg mx-auto">
+                    <li class="content-card animated-item animated-item-3">
+                        **Product Development:** Enhance AI capabilities, expand module integrations (e.g., advanced HR, sales tools).
+                    </li>
+                    <li class="content-card animated-item animated-item-4">
+                        **Market Expansion:** Aggressive user acquisition across Tier 1 & Tier 2 Indian cities.
+                    </li>
+                    <li class="content-card animated-item animated-item-5">
+                        **Team Growth:** Scale engineering, product, and customer success teams.
+                    </li>
+                </ul>
+
+                <h2 class="text-4xl font-extrabold text-orange-500 mb-6 mt-8 animated-item animated-item-6">Our Vision: The OS for Every Indian Startup</h2>
+                <p class="text-2xl text-gray-300 leading-relaxed mb-10 animated-item animated-item-7">
+                    To be the definitive operating system for every startup in India, accelerating growth and simplifying complexities.
+                </p>
+                <p class="text-3xl font-extrabold text-green-400 mb-10 animated-item animated-item-8">
+                    Empowering Indian innovation, one startup at a time.
+                </p>
+                <div class="text-xl text-gray-200 mt-8 animated-item animated-item-9">
+                    <p class="mb-2"><strong>Let's connect and build the future of Indian startups together!</strong></p>
+                    <p class="mb-1">contact@startupsaathi.com</p>
+                    <p>www.startupsaathi.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Feature Detail Modal Structure (for Offerings/Demo Learn More buttons) -->
+    <div id="feature-detail-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto relative" style="color: #1A1A1A;">
+            <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-800" onclick="hideFeatureDetailModal()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 id="feature-detail-title" class="text-2xl font-bold text-black mb-4 pb-2 border-b border-orange-300"></h3>
+            <div id="feature-detail-content" class="prose max-w-none text-gray-700">
+                <!-- Content loaded dynamically here -->
+            </div>
+            <div class="mt-6 text-right">
+                <button class="btn-theme-primary text-sm" onclick="hideFeatureDetailModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Pitch Deck Data Configuration ---
+        const deckTitle = "Startup Saathi Pitch Deck";
+        const slideData = [
+            { title: 'Home', contentId: 'slide-1' },
+            { title: 'Problem', contentId: 'slide-2' },
+            { title: 'Solution', contentId: 'slide-3' },
+            { title: 'Offerings', contentId: 'slide-4' },
+            { title: 'Demo', contentId: 'slide-5' },
+            { title: 'Market', contentId: 'slide-6' },
+            { title: 'Business Model', contentId: 'slide-7' },
+            { title: 'Competitive Advantage', contentId: 'slide-8' },
+            { title: 'Team', contentId: 'slide-9' },
+            { title: 'The Ask', contentId: 'slide-10' }
+        ];
+
+        // --- DOM Element References ---
+        const slideContainer = document.getElementById('slideContainer');
+        const leftNavLinksContainer = document.getElementById('leftNavLinks');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const menuToggle = document.getElementById('menuToggle');
+        const leftNav = document.getElementById('leftNav');
+        
+        let currentSlideIndex = 0; // Tracks the currently active slide
+        const totalSlides = slideData.length;
+
+        // Declare these variables in a broader scope so they are accessible to all functions
+        let leftNavLinks;
+        let slides;
+
+        // --- Initial Setup Functions ---
+
+        // Set document title and header title dynamically
+        document.title = deckTitle;
+        document.getElementById('deckTitleHeader').textContent = deckTitle;
+
+        // Initialize slides and left navigation links
+        function initializeDeck() {
+            slideData.forEach((data, index) => {
+                // Create navigation link for the left sidebar
+                const link = document.createElement('a');
+                link.href = `#${data.contentId}`;
+                link.textContent = data.title;
+                link.className = 'left-nav-link block p-3 rounded-md text-gray-300 hover:bg-white/10 transition-colors duration-200';
+                link.addEventListener('click', (e) => { 
+                    e.preventDefault(); // Prevent default anchor link behavior
+                    goToSlide(index); // Navigate to the clicked slide
+                    // Hide mobile navigation after selection on small screens
+                    if (window.innerWidth < 768) {
+                        leftNav.classList.add('-translate-x-full');
+                    }
+                });
+                leftNavLinksContainer.appendChild(link);
+            });
+            
+            // Assign values to the widely scoped variables after they are created
+            leftNavLinks = leftNavLinksContainer.querySelectorAll('.left-nav-link');
+            slides = Array.from(document.querySelectorAll('.slide')); // Convert NodeList to Array
+
+            // Adjust slide container width for horizontal layout, ensuring all slides fit
+            slideContainer.style.width = `${totalSlides * 100}vw`;
+
+            // Initial UI update to set the first slide as active
+            goToSlide(0);
+        }
+
+        // --- Core Slide Navigation Logic ---
+
+        // Function to update active states, navigation controls, and trigger animations
+        function updateUI() {
+            // Update active class for left navigation links
+            leftNavLinks.forEach((link, index) => {
+                link.classList.toggle('active', index === currentSlideIndex);
+            });
+
+            // Enable/disable Prev/Next buttons based on current slide position
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+
+            // Apply transform to slide container for horizontal scrolling effect
+            slideContainer.style.transform = `translateX(-${currentSlideIndex * 100}vw)`;
+
+            // Manage animation classes for the current slide
+            slides.forEach((slide, index) => {
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active'); // Add 'active' to trigger animations
+                    // Reset scroll position to top when slide becomes active
+                    slide.scrollTop = 0;
+                } else {
+                    slide.classList.remove('active'); // Remove 'active' from non-current slides
+                    // Reset animations for non-active slides to ensure re-play on next activation
+                    slide.querySelectorAll('.animated-item').forEach(item => {
+                        item.style.animation = 'none'; // Temporarily remove animation
+                        item.offsetHeight; /* Trigger reflow to apply 'none' immediately */
+                        item.style.animation = null; // Revert to original animation property
+                        item.style.opacity = '0'; // Keep hidden until next active state
+                    });
+                }
+            });
+        }
+
+        // Function to navigate to a specific slide by index
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlideIndex = index;
+                updateUI(); // Update the UI after changing the slide index
+            }
+        }
+
+        // --- Event Listeners for User Interaction (Enhanced Scrolling) ---
+
+        // Navigation buttons
+        nextBtn.addEventListener('click', () => goToSlide(currentSlideIndex + 1));
+        prevBtn.addEventListener('click', () => goToSlide(currentSlideIndex - 1));
+
+        // Mobile menu toggle button
+        menuToggle.addEventListener('click', () => {
+            leftNav.classList.toggle('-translate-x-full'); // Toggle visibility of left navigation
+        });
+
+        // Keyboard navigation (Arrow keys)
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                const currentSlideElement = slides[currentSlideIndex];
+                // Check if the current slide is vertically scrollable and not at the bottom
+                if (currentSlideElement.scrollHeight > currentSlideElement.clientHeight &&
+                    currentSlideElement.scrollTop + currentSlideElement.clientHeight < currentSlideElement.scrollHeight) {
+                    // Scroll within the slide if not at the bottom
+                    e.preventDefault();
+                    currentSlideElement.scrollTop += 60; // Smooth scroll down
+                } else {
+                    // Go to the next slide if at the bottom or not scrollable
+                    goToSlide(currentSlideIndex + 1);
+                }
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                const currentSlideElement = slides[currentSlideIndex];
+                // Check if the current slide is vertically scrollable and not at the top
+                if (currentSlideElement.scrollHeight > currentSlideElement.clientHeight &&
+                    currentSlideElement.scrollTop > 0) {
+                    // Scroll within the slide if not at the top
+                    e.preventDefault();
+                    currentSlideElement.scrollTop -= 60; // Smooth scroll up
+                } else {
+                    // Go to the previous slide if at the top or not scrollable
+                    goToSlide(currentSlideIndex - 1);
+                }
+            }
+        });
+
+        // Wheel (scroll) navigation with debounce and enhanced logic
+        let lastScrollTime = 0;
+        window.addEventListener('wheel', (e) => {
+            const now = new Date().getTime();
+            if (now - lastScrollTime < 800) { // Debounce for 800ms
+                return;
+            }
+            lastScrollTime = now;
+
+            const currentSlideElement = slides[currentSlideIndex];
+            const isScrollableVertically = currentSlideElement.scrollHeight > currentSlideElement.clientHeight;
+
+            if (e.deltaY > 0) { // Scroll down
+                // If scrollable and not at the very bottom, scroll internally
+                if (isScrollableVertically && currentSlideElement.scrollTop + currentSlideElement.clientHeight < currentSlideElement.scrollHeight - 1) { // -1 for precision
+                    e.preventDefault(); // Prevent main page scroll
+                    currentSlideElement.scrollTop += 60; // Adjust scroll amount as needed
+                } else {
+                    // Go to next slide if at bottom or not scrollable
+                    goToSlide(currentSlideIndex + 1);
+                }
+            } else { // Scroll up
+                // If scrollable and not at the very top, scroll internally
+                if (isScrollableVertically && currentSlideElement.scrollTop > 1) { // +1 for precision
+                    e.preventDefault(); // Prevent main page scroll
+                    currentSlideElement.scrollTop -= 60; // Adjust scroll amount as needed
+                } else {
+                    // Go to previous slide if at top or not scrollable
+                    goToSlide(currentSlideIndex - 1);
+                }
+            }
+        }, { passive: false }); // Needs to be passive: false to allow preventDefault()
+
+        // Touch swipe navigation with enhanced logic
+        let touchstartX = 0;
+        let touchstartY = 0; // Track vertical start for internal scrolling
+
+        slideContainer.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+            touchstartY = e.changedTouches[0].screenY; // Record Y position
+        }, { passive: true });
+
+        slideContainer.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            let touchendY = e.changedTouches[0].screenY; // Record Y position
+            const thresholdX = 50; // Minimum horizontal swipe distance
+            const thresholdY = 50; // Minimum vertical swipe distance
+
+            const currentSlideElement = slides[currentSlideIndex];
+            const isScrollableVertically = currentSlideElement.scrollHeight > currentSlideElement.clientHeight;
+
+            const deltaX = touchendX - touchstartX;
+            const deltaY = touchendY - touchstartY;
+
+            // Determine if it's primarily a horizontal swipe (for slide change) or vertical (for internal scroll)
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > thresholdX) { // Horizontal swipe detected
+                if (deltaX < 0) { // Swiped left
+                    goToSlide(currentSlideIndex + 1);
+                } else { // Swiped right
+                    goToSlide(currentSlideIndex - 1);
+                }
+            } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > thresholdY) { // Vertical swipe detected
+                if (deltaY < 0) { // Swiped up (user wants to scroll down content or go to next slide)
+                    if (isScrollableVertically && currentSlideElement.scrollTop + currentSlideElement.clientHeight < currentSlideElement.scrollHeight - 1) {
+                        // Content is scrollable downwards, do nothing (let native scroll handle it)
+                    } else {
+                        // At bottom of internal scroll, or not scrollable: go to next slide
+                        goToSlide(currentSlideIndex + 1);
+                    }
+                } else { // Swiped down (user wants to scroll up content or go to previous slide)
+                    if (isScrollableVertically && currentSlideElement.scrollTop > 1) {
+                        // Content is scrollable upwards, do nothing (let native scroll handle it)
+                    } else {
+                        // At top of internal scroll, or not scrollable: go to previous slide
+                        goToSlide(currentSlideIndex - 1);
+                    }
+                }
+            }
+        }, { passive: true }); // passive: true because native scrolling handles default action for vertical swipes
+
+        // --- Feature Detail Modal Logic ---
+
+        // Function to display the feature detail modal with dynamic content
+        window.showFeatureDetail = function(event, title, content) {
+            event.preventDefault(); // Stop default button behavior
+            document.getElementById('feature-detail-title').innerText = title;
+            document.getElementById('feature-detail-content').innerHTML = `<p>${content}</p>`;
+            document.getElementById('feature-detail-modal').classList.remove('hidden'); // Show the modal
+        }
+
+        // Function to hide the feature detail modal
+        window.hideFeatureDetailModal = function() {
+            document.getElementById('feature-detail-modal').classList.add('hidden'); // Hide the modal
+            document.getElementById('feature-detail-title').innerText = ''; // Clear title
+            document.getElementById('feature-detail-content').innerHTML = ''; // Clear content
+        }
+
+        // --- Initialization on DOM Ready ---
+        initializeDeck(); // Call the main initialization function
+    });
+    </script>
+</body>
+</html>
+
