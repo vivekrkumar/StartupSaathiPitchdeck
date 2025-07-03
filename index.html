@@ -187,6 +187,50 @@
             width: 1.25rem;
             height: 1.25rem;
         }
+        /* MVP Summary Specific Styles */
+        .mvp-summary-section {
+            padding: 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mvp-summary-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #FFA500; /* orange-500 */
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .mvp-summary-section h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #FFD700; /* Gold for sub-headings */
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .mvp-summary-section ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .mvp-summary-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        .mvp-summary-section .highlight {
+            color: #F97316; /* orange-600 */
+            font-weight: 600;
+        }
+        .mvp-summary-section .sub-highlight {
+            color: #FFA500; /* orange-500 */
+            font-weight: 500;
+        }
+        .mvp-summary-section .metric-item {
+            background-color: rgba(249, 115, 22, 0.1); /* orange-600 with transparency */
+            border-left: 4px solid #F97316;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
     </style>
 </head>
 <body>
@@ -234,22 +278,22 @@
         <!-- Slide 2: The Problem -->
         <section id="slide-2" class="slide">
             <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
-                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">The Problem: Navigating the Startup Maze</h2>
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">The Problem: Fragmented Support for Indian Founders</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
-                    Indian founders face a unique set of challenges that divert focus from core innovation.
+                    Indian founders navigate a complex ecosystem with no single, integrated platform to streamline their journey from idea to funding.
                 </p>
                 <ul class="list-disc list-inside text-lg text-gray-200 space-y-4">
                     <li class="content-card animated-item animated-item-3">
-                        <strong class="text-red-400">Bureaucratic Hurdles:</strong> Tedious, manual processes for company registration, licenses, and government recognition.
+                        <strong class="text-red-400">Disconnected Ideation & Collaboration:</strong> No unified space to ideate, build concepts (problem, solution, market), and manage shared collateral (spreadsheets, PPTs) securely with co-founders.
                     </li>
                     <li class="content-card animated-item animated-item-4">
-                        <strong class="text-amber-400">Compliance Overload:</strong> Constant deadlines for GST, IT, PF, and other regulatory filings, leading to penalties if missed.
+                        <strong class="text-amber-400">Complex Company Formation & IP:</strong> Tedious, manual processes for company registration, DPIIT/MSME recognition, and ensuring brand name/trademark availability and protection.
                     </li>
                     <li class="content-card animated-item animated-item-5">
-                        <strong class="text-blue-400">Funding Gap & Dilution Fears:</strong> Difficulty identifying the right investors, managing capital raises, and understanding complex equity dilution.
+                        <strong class="text-blue-400">Opaque Funding & Equity Management:</strong> Difficulty understanding diverse funding options (VCs, angels, govt. grants) and simulating equity dilution scenarios for different valuations.
                     </li>
                     <li class="content-card animated-item animated-item-6">
-                        <strong class="text-green-400">Lack of Centralized Support:</strong> No single, integrated platform for all essential non-core business needs, from ideation to scaling.
+                        <strong class="text-green-400">Compliance Overload:</strong> Constant deadlines for GST, IT, PF, and other regulatory filings, leading to penalties if missed, without centralized alerts or assistance.
                     </li>
                 </ul>
             </div>
@@ -283,7 +327,7 @@
                     </div>
                     <div class="content-card animated-item animated-item-6">
                         <div class="flex items-center">
-                            <svg class="w-8 h-8 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5A2.5 2.5 0 005 7.5c0 .67.333 1.258.85 1.653M12 6.253C13.168 5.477 14.754 5 16.5 5A2.5 2.5 0 0119 7.5c0 .67-.333 1.258-.85-1.653m-1.336 1.336c-.714.535-1.547.95-2.433 1.196m-9.363 1.096c.714.535 1.547.95 2.433 1.196m-1.006.106C7.832 14.477 9.246 15 10.5 15A2.5 2.5 0 0013 12.5c0-.67-.333-1.258-.85-1.653m-1.336 1.336c-.714.535-1.547.95 2.433 1.196m-9.363 1.096c.714.535 1.547.95 2.433 1.196"></path></svg>
+                            <svg class="w-8 h-8 text-orange-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5A2.5 2.5 0 005 7.5c0 .67.333 1.258.85 1.653M12 6.253C13.168 5.477 14.754 5 16.5 5A2.5 2.5 0 0119 7.5c0 .67-.333 1.258-.85-1.653m-1.336 1.336c-.714.535-1.547.95-2.433 1.196m-9.363 1.096c.714.535 1.547.95 2.433 1.196m-1.006.106C7.832 14.477 9.246 15 10.5 15A2.5 2.5 0 0013 12.5c0-.67-.333-1.258-.85-1.653m-1.336 1.336c-.714.535 1.547.95 2.433 1.196m-9.363 1.096c.714.535 1.547.95 2.433 1.196"></path></svg>
                             <p><strong class="text-orange-400">Expert-Curated Resources:</strong> Templates, guides, and network access for informed decision-making.</p>
                         </div>
                     </div>
@@ -436,9 +480,80 @@
             </div>
         </section>
 
-
-        <!-- Slide 7: Market Opportunity & Size -->
+        <!-- Slide 7: MVP Summary -->
         <section id="slide-7" class="slide">
+            <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
+                <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">MVP: The "Groundwork Launchpad" (2-3 Months)</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
+                    Our immediate focus is to provide a secure, intuitive, and collaborative space for founders to define their idea, formalize their company, and get initial funding/equity clarity.
+                </p>
+
+                <div class="mvp-summary-section animated-item animated-item-3">
+                    <h2>Functions We Want to Cover</h2>
+                    <ul>
+                        <li><span class="highlight">Secure User Accounts & Collaboration:</span> Registration/login, dashboard, basic team invitation, shared workspace.</li>
+                        <li><span class="highlight">Concept Builder:</span> Structured sections (Problem, Solution, Product, Market, Revenue, Traction, Team, Ask, Vision) with <span class="sub-highlight">AI Integration</span> (Idea Sparker, Content Assistant, Executive Summary Draft).</li>
+                        <li><span class="highlight">Basic File Repository:</span> Upload and view common documents.</li>
+                        <li><span class="highlight">Company Registration & Essential Templates:</span> Guided info on incorporation (Pvt Ltd, LLP, OPC), DPIIT/MSME. <span class="sub-highlight">AI Integration:</span> Document Checklist, Template Explainer. Downloadable templates (MoA, AoA, Founders Agreement, etc.).</li>
+                        <li><span class="highlight">IP & Branding Checks:</span> Simulated Name/Trademark & Domain Checks. <span class="sub-highlight">AI Integration:</span> Brand Name Generator, Trademark Insight.</li>
+                        <li><span class="highlight">Curated Government Funding Options:</span> List of key Indian grants/schemes with summaries and official links. <span class="sub-highlight">AI Integration:</span> Scheme Summarizer, Relevance Suggestor.</li>
+                        <li><span class="highlight">Base Valuation & Equity Allocation Simulator:</span> Interactive tool to input current equity, simulate a single funding round, and basic dilution impact. <span class="sub-highlight">AI Integration:</span> Multiple Contextualizer, Dilution Explainer.</li>
+                    </ul>
+                </div>
+
+                <div class="mvp-summary-section animated-item animated-item-4">
+                    <h2>Value It Will Provide</h2>
+                    <p class="text-gray-300 mb-4">
+                        Delivering immediate, tangible benefits to early-stage founders.
+                    </p>
+                    <ul>
+                        <li><span class="highlight">Accelerated Idea Validation:</span> Structured approach to define and refine business concepts.</li>
+                        <li><span class="highlight">Streamlined Formalization:</span> Simplifies complex company registration and legal documentation.</li>
+                        <li><span class="highlight">Early Clarity on Funding:</span> Provides initial insights into government grants and equity impact.</li>
+                        <li><span class="highlight">Enhanced Collaboration:</span> Centralized, secure workspace for co-founders and early teams.</li>
+                        <li><span class="highlight">Reduced Cost & Risk:</span> Minimizes reliance on expensive external consultants for initial groundwork.</li>
+                        <li><span class="highlight">Intelligent Assistance:</span> AI-powered tools offer guidance and automate tedious tasks.</li>
+                    </ul>
+                </div>
+
+                <div class="mvp-summary-section animated-item animated-item-5">
+                    <h2>Metrics We Want to Track</h2>
+                    <p class="text-gray-300 mb-4">
+                        Measuring MVP success and user engagement.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="metric-item">Number of new user sign-ups.</div>
+                        <div class="metric-item">Number of active workspaces/concepts created.</div>
+                        <div class="metric-item">Engagement with Concept Builder (e.g., sections completed, AI feature usage).</div>
+                        <div class="metric-item">Template download rates.</div>
+                        <div class="metric-item">Usage of Equity Simulator (number of simulations run).</div>
+                        <div class="metric-item">Clicks on Government Funding scheme links.</div>
+                        <div class="metric-item">User retention (e.g., weekly/monthly active users).</div>
+                        <div class="metric-item">Feedback collected from early adopters.</div>
+                    </div>
+                </div>
+
+                <div class="mvp-summary-section animated-item animated-item-6">
+                    <h2>Tech for MVP</h2>
+                    <p class="text-gray-300 mb-4">
+                        Lean, scalable, and efficient stack for rapid development.
+                    </p>
+                    <ul>
+                        <li><span class="highlight">Frontend:</span> <span class="sub-highlight">React.js / Next.js</span> with <span class="sub-highlight">Tailwind CSS</span>.</li>
+                        <li><span class="highlight">Backend & Database:</span> <span class="sub-highlight">Firebase</span> (Authentication, Cloud Firestore, Firebase Storage, Cloud Functions).</li>
+                        <li><span class="highlight">AI Integration:</span> Leveraging <span class="sub-highlight">LLM APIs</span> (e.g., Google Gemini-2.0-Flash, OpenAI GPT-3.5 Turbo) via secure <span class="sub-highlight">Cloud Functions</span>. Focus on prompt engineering.</li>
+                        <li><span class="highlight">Hosting & Deployment:</span> Firebase Hosting / Vercel / Netlify.</li>
+                    </ul>
+                </div>
+
+                <p class="text-center text-gray-300 mt-8 animated-item animated-item-7">
+                    **Startup Saathi: Empowering Indian founders with the tools they need, right from the start.**
+                </p>
+            </div>
+        </section>
+
+        <!-- Slide 8: Market Opportunity & Size -->
+        <section id="slide-8" class="slide">
             <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
                 <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Market Opportunity & Size: A Trillion-Dollar Ecosystem</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
@@ -462,7 +577,7 @@
         </section>
 
         <!-- Slide 8: Business Model & Projections -->
-        <section id="slide-8" class="slide">
+        <section id="slide-9" class="slide">
             <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
                 <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Business Model: Value-Driven Tiers & Revenue Potential</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
@@ -522,7 +637,7 @@
         </section>
 
         <!-- Slide 9: Our Competitive Advantage -->
-        <section id="slide-9" class="slide">
+        <section id="slide-10" class="slide">
             <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
                 <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Our Competitive Advantage</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
@@ -558,7 +673,7 @@
         </section>
 
         <!-- Slide 10: Competitive Landscape -->
-        <section id="slide-10" class="slide">
+        <section id="slide-11" class="slide">
             <div class="max-w-5xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
                 <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Competitive Landscape: Our Unique Position</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
@@ -622,7 +737,7 @@
         </section>
 
         <!-- Slide 11: Our Team -->
-        <section id="slide-11" class="slide">
+        <section id="slide-12" class="slide">
             <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl">
                 <h2 class="text-4xl font-extrabold mb-6 border-b-2 border-orange-500 pb-2 animated-item animated-item-1">Our Team: Built by Founders, for Founders</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
@@ -649,7 +764,7 @@
         </section>
 
         <!-- Slide 12: The Ask & Vision -->
-        <section id="slide-12" class="slide">
+        <section id="slide-13" class="slide">
             <div class="max-w-4xl mx-auto p-8 text-white bg-black-translucent rounded-lg shadow-xl text-center">
                 <h2 class="text-4xl font-extrabold mb-6 animated-item animated-item-1 text-orange-400">The Ask: Fueling India's Startup Revolution</h2>
                 <p class="text-xl text-gray-300 leading-relaxed mb-8 animated-item animated-item-2">
@@ -710,12 +825,13 @@
             { title: 'Offerings', contentId: 'slide-4' },
             { title: 'Demo', contentId: 'slide-5' },
             { title: 'Future Value', contentId: 'slide-6' },
-            { title: 'Market', contentId: 'slide-7' },
-            { title: 'Business Model', contentId: 'slide-8' },
-            { title: 'Competitive Advantage', contentId: 'slide-9' },
-            { title: 'Competitors', contentId: 'slide-10' }, // New slide
-            { title: 'Team', contentId: 'slide-11' },
-            { title: 'The Ask', contentId: 'slide-12' }
+            { title: 'MVP Plan', contentId: 'slide-7' }, // New slide
+            { title: 'Market', contentId: 'slide-8' },
+            { title: 'Business Model', contentId: 'slide-9' },
+            { title: 'Competitive Advantage', contentId: 'slide-10' },
+            { title: 'Competitors', contentId: 'slide-11' },
+            { title: 'Team', contentId: 'slide-12' },
+            { title: 'The Ask', contentId: 'slide-13' } // Adjusted index
         ];
 
         document.title = deckTitle;
@@ -762,7 +878,7 @@
                 link.classList.toggle('active', index === currentSlideIndex);
             });
 
-            // Update prev/next buttons
+            // Update top prev/next buttons
             prevBtn.disabled = currentSlideIndex === 0;
             nextBtn.disabled = currentSlideIndex === totalSlides - 1;
 
@@ -773,6 +889,8 @@
             slides.forEach((slide, index) => {
                 if (index === currentSlideIndex) {
                     slide.classList.add('active');
+                    // Reset scroll position to top when changing slides
+                    slide.scrollTop = 0; 
                 } else {
                     slide.classList.remove('active');
                     // Reset animations for non-active slides
@@ -812,61 +930,26 @@
             }
         });
 
-        // Wheel (scroll) navigation with debounce and scroll position check
-        let lastScrollTime = 0;
+        // Wheel (scroll) navigation is now entirely disabled for slide changes.
+        // Scrolling within a slide will only scroll that slide's content.
         window.addEventListener('wheel', (e) => {
-            const now = new Date().getTime();
-            // Allow immediate scroll within a slide if not at top/bottom
-            const currentSlideElement = slides[currentSlideIndex];
-            const scrollTolerance = 5; // Pixels from top/bottom to consider "at end"
-            const isAtTop = currentSlideElement.scrollTop <= scrollTolerance;
-            const isAtBottom = (currentSlideElement.scrollTop + currentSlideElement.clientHeight >= currentSlideElement.scrollHeight - scrollTolerance);
+            // This listener is intentionally left to allow native scrolling within the current slide
+            // but will NOT trigger slide changes.
+            // If you later decide to re-enable scroll-based slide changes, this is where you'd add the logic.
+        }, { passive: true }); // passive: true to avoid blocking main thread for scrolling
 
-            if (e.deltaY > 0) { // Scrolling down
-                if (!isScrollable(currentSlideElement) || isAtBottom) { // If not scrollable OR at the very bottom
-                    if (now - lastScrollTime < 800) { // Apply debounce only when attempting to change slide
-                        e.preventDefault(); // Prevent default scroll if debounce is active
-                        return;
-                    }
-                    lastScrollTime = now; // Update time only when a slide transition *might* occur
-                    goToSlide(currentSlideIndex + 1);
-                    e.preventDefault(); // Prevent default scroll behavior
-                }
-            } else { // Scrolling up
-                if (!isScrollable(currentSlideElement) || isAtTop) { // If not scrollable OR at the very top
-                    if (now - lastScrollTime < 800) { // Apply debounce only when attempting to change slide
-                        e.preventDefault(); // Prevent default scroll if debounce is active
-                        return;
-                    }
-                    lastScrollTime = now; // Update time only when a slide transition *might* occur
-                    goToSlide(currentSlideIndex - 1);
-                    e.preventDefault(); // Prevent default scroll behavior
-                }
-            }
-        }, { passive: false }); // Use passive: false to allow preventDefault if needed.
 
-        // Helper function to check if a slide's content is scrollable
-        function isScrollable(element) {
-            return element.scrollHeight > element.clientHeight;
-        }
-
-        // Touch swipe navigation
-        let touchstartX = 0;
+        // Touch swipe navigation is now entirely disabled for slide changes.
+        // Swiping within a slide will only scroll that slide's content.
         slideContainer.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        }, { passive: true }); // passive: true for better scroll performance
+            // This listener is intentionally left to allow native scrolling within the current slide
+            // but will NOT trigger slide changes.
+        }, { passive: true });
 
         slideContainer.addEventListener('touchend', e => {
-            let touchendX = e.changedTouches[0].screenX;
-            const threshold = 50; // Minimum swipe distance
-
-            if (touchendX < touchstartX - threshold) { // Swiped left
-                goToSlide(currentSlideIndex + 1);
-            }
-            if (touchendX > touchstartX + threshold) { // Swiped right
-                goToSlide(currentSlideIndex - 1);
-            }
-        }, { passive: true }); // passive: true for better scroll performance
+            // This listener is intentionally left to allow native scrolling within the current slide
+            // but will NOT trigger slide changes.
+        }, { passive: true });
 
 
         // Feature Detail Modal Logic
