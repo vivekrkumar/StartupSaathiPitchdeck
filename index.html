@@ -1470,6 +1470,16 @@ IN WITNESS WHEREOF, the parties have executed this Agreement as of the date firs
                 if (sectionId === 'concept-builder') {
                     showConceptTab(null, 'problem'); // Default to problem tab
                     updateConceptBuilderIdeaName(); // Update idea name in heading
+
+                    // Populate the problem textarea based on selectedIdeaName
+                    const problemTextarea = document.getElementById('problem-textarea');
+                    if (problemTextarea) {
+                        if (selectedIdeaName && selectedIdeaName !== '[Your Idea Name Here]') {
+                            problemTextarea.value = `The core problem for "${selectedIdeaName}" is that users currently face challenges with [specific pain point related to idea] due to [lack of solution/inefficiency]. This leads to [negative consequence].`;
+                        } else {
+                            problemTextarea.value = `Describe the core problem your target users face. Be specific about who has this problem and why it's painful.`;
+                        }
+                    }
                 }
                 // Special handling for Team Management to render members and page selection
                 if (sectionId === 'team-management') {
@@ -1518,6 +1528,35 @@ IN WITNESS WHEREOF, the parties have executed this Agreement as of the date firs
             const ideaNameSpan = document.getElementById('concept-builder-idea-name');
             if (ideaNameSpan) {
                 ideaNameSpan.innerText = selectedIdeaName || '[Your Idea Name Here]';
+            }
+        }
+
+        // --- Concept Builder Tab Logic ---
+        function showConceptTab(event, tabName) {
+            if (event) event.preventDefault();
+
+            // Deactivate all tabs and hide all content
+            document.querySelectorAll('#concept-builder-tabs button').forEach(button => {
+                button.classList.remove('text-orange-600', 'border-orange-600');
+                button.classList.add('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                button.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.concept-tab-content').forEach(content => {
+                content.classList.remove('active');
+                content.classList.add('hidden');
+            });
+
+            // Activate selected tab and show content
+            const selectedTabButton = document.getElementById(`${tabName}-tab`);
+            const selectedTabContent = document.getElementById(`${tabName}-content`);
+
+            if (selectedTabButton && selectedTabContent) {
+                selectedTabButton.classList.add('text-orange-600', 'border-orange-600');
+                selectedTabButton.classList.remove('border-transparent', 'hover:text-gray-600', 'hover:border-gray-300');
+                selectedTabButton.setAttribute('aria-selected', 'true');
+
+                selectedTabContent.classList.remove('hidden');
+                selectedTabContent.classList.add('active'); // Re-apply active for fade-in effect
             }
         }
 
@@ -2094,7 +2133,7 @@ IN WITNESS WHEREOF, the parties have executed this Agreement as of the date firs
                 } else if (tabName === 'revenue') {
                     enhancedText = `Optimized Revenue Model: Our primary revenue streams will be generated through a [Subscription/Freemium/Transaction-based] model, with projected annual revenues of ₹[Amount] Lakhs in Year 1, growing to ₹[Larger Amount] Lakhs by Year 3. This model is designed for scalability, recurring income, and a clear path to profitability by [Month/Year].`;
                 } else if (tabName === 'traction') {
-                    enhancedText = `Key Traction & Milestones: We have achieved significant early traction, including [Number] active users, ₹[Amount] in monthly recurring revenue, and strategic partnerships with [Partner Names]. Our recent product launch saw [Metric, e.g., 20% week-over-week] growth, validating our market fit and paving the way for accelerated expansion.`;
+                    enhancedText = `Key Traction & Milestones: We have achieved significant early traction, including [Number] active users, ₹[Amount] in monthly recurring revenue, and strategic partnerships with [Names]. Our recent product launch saw [Metric, e.g., 20% week-over-week] growth, validating our market fit and paving the way for accelerated expansion.`;
                 } else if (tabName === 'team') {
                     enhancedText = `Exceptional Founding Team: Our core team comprises [Founder 1 Name], a visionary with [Relevant Experience, e.g., 10+ years in FinTech and 2 successful exits], and [Founder 2 Name], an expert in [Relevant Expertise, e.g., AI/ML development with patents]. Together, our diverse skill sets, complementary expertise, and shared passion position us uniquely to execute this venture successfully and disrupt the [Industry] sector.`;
                 } else if (tabName === 'competition') {
@@ -2276,7 +2315,7 @@ IN WITNESS WHEREOF, the parties have executed this Agreement as of the date firs
                 tableBody.innerHTML = tableRowsHtml;
                 totalContributionSpan.innerText = totalScoreContribution.toFixed(1);
 
-                // Overall AI/ML Summary & Strategic Recommendations
+                // Overall Summary & Strategic Recommendations
                 const summary = `
                     <p class="font-semibold mb-2">Overall Summary:</p>
                     <p>Your startup, "${startupName}", demonstrates strong potential in Market Differentiation, Market Alignment, and Founder & Team Strength, which are critical pillars for early-stage success. The models highlight your unique approach and the team's robust expertise as significant advantages.</p>
